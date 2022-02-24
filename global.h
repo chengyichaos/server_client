@@ -14,6 +14,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <mysql/mysql.h>    //新添加
 using namespace std;
 
 #endif
