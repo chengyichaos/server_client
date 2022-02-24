@@ -49,7 +49,7 @@ void server::run(){
             exit(1);//结束程序
         }
         cout<<"文件描述符为"<<conn<<"的客户端成功连接\n";
-        sock_arr.push_back(conn);
+        sock_arr[conn]=true;
         //创建线程
         thread t(server::RecvMsg,conn);
         t.detach();//置为分离状态，不能用join，join会导致主线程阻塞
@@ -68,7 +68,7 @@ void server::RecvMsg(int conn){
         int len = recv(conn, buffer, sizeof(buffer),0);
         //客户端发送exit或者异常结束时，退出
         if(strcmp(buffer,"exit")==0 || len<=0){
-	    close(conn);
+	    close(conn);//关闭与客户端的套接子
 	    sock_arr[conn]=false;
 	    break;
 	}
@@ -80,6 +80,8 @@ void server::RecvMsg(int conn){
         if(ret<=0){
             close(conn);
             sock_arr[conn]=false;
+
+	    cout<<"ke hu duan guan bi"<<endl;
             break;
 	}
     }

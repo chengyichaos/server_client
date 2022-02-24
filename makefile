@@ -7,4 +7,4 @@ test_client: test_client.cpp client.cpp client.h global.h
 	g++ -o test_client test_client.cpp client.cpp -lpthread
 clean:
 	rm test_server
-	rm test_clienti
+	rm test_client

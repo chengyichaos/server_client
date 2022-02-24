@@ -2,7 +2,7 @@
 
 client::client(int port,string ip):server_port(port),server_ip(ip){}
 client::~client(){
-    close(sock);
+    close(sock);   //int sock;//与服务器建立连接的套接字描述符
 }
 void client::run(){
 
@@ -22,12 +22,17 @@ void client::run(){
         perror("connect");
         exit(1);
     }
-    cout<<"连接服务器成功\n";
+    cout<<"连接服务器成功\n";//   1
 
     //创建发送线程和接收线程
     thread send_t(SendMsg,sock),recv_t(RecvMsg,sock);
     send_t.join();
     cout<<"发送线程已结束\n";
+
+    cout<<"1111111111"<<endl;
+    cout<<"2222222222"<<endl;
+    cout<<"3333333333"<<endl;
+
     recv_t.join();
     cout<<"接收线程已结束\n";
     return;
